@@ -1,0 +1,201 @@
+!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Clip Alofoke</title>
+
+  <style>
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      font-family: Arial, sans-serif;
+
+      background: #100d18;
+
+      color: white;
+
+      padding: 22px;
+
+    }
+
+    .app {
+
+      max-width: 650px;
+
+      margin: auto;
+
+    }
+
+    header {
+
+      text-align: center;
+
+      padding: 25px 10px;
+
+    }
+
+    h1 { color: #c084fc; font-size: 32px; }
+
+    .panel {
+
+      background: #211a30;
+
+      border: 1px solid #49345e;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      margin: 18px 0;
+
+    }
+
+    input, button {
+
+      width: 100%;
+
+      padding: 14px;
+
+      margin-top: 12px;
+
+      border-radius: 10px;
+
+      font-size: 16px;
+
+    }
+
+    input {
+
+      background: #100d18;
+
+      color: white;
+
+      border: 1px solid #665078;
+
+    }
+
+    button {
+
+      border: 0;
+
+      background: #a855f7;
+
+      color: white;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+    button:disabled { opacity: .5; }
+
+    .muted { color: #c4b5d4; line-height: 1.5; }
+
+    video { width: 100%; margin-top: 15px; border-radius: 12px; }
+
+    footer { text-align: center; color: #a99ab8; padding: 20px; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header>
+
+      <h1>🎬 Clip Alofoke</h1>
+
+      <p>¡Tus mejores momentos en un solo lugar!</p>
+
+    </header>
+
+    <section class="panel">
+
+      <h2>📹 Crear un clip</h2>
+
+      <p class="muted">Selecciona un video que tengas guardado en tu dispositivo.</p>
+
+      <input type="file" id="videoFile" accept="video/*">
+
+      <video id="preview" controls hidden></video>
+
+    </section>
+
+    <section class="panel">
+
+      <h2>✂️ Recortar video</h2>
+
+      <label>Inicio (segundos)</label>
+
+      <input type="number" id="start" min="0" value="0">
+
+      <label>Duración del clip (segundos)</label>
+
+      <input type="number" id="duration" min="15" max="180" value="30">
+
+      <button id="prepare">Preparar mi clip</button>
+
+      <p id="message" class="muted">Selecciona un video para comenzar.</p>
+
+    </section>
+
+    <footer>Clip Alofoke · Mi estudio de clips</footer>
+
+  </main>
+
+  <script>
+
+    const fileInput = document.getElementById('videoFile');
+
+    const preview = document.getElementById('preview');
+
+    const message = document.getElementById('message');
+
+    fileInput.addEventListener('change', () => {
+
+      const file = fileInput.files[0];
+
+      if (!file) return;
+
+      preview.src = URL.createObjectURL(file);
+
+      preview.hidden = false;
+
+      message.textContent = 'Video cargado. Esta versión es una primera maqueta.';
+
+    });
+
+    document.getElementById('prepare').addEventListener('click', () => {
+
+      if (!fileInput.files.length) {
+
+        message.textContent = 'Primero selecciona un video.';
+
+        return;
+
+      }
+
+      message.textContent =
+
+        '¡Video listo para el siguiente paso! El recorte y la exportación todavía deben conectarse.';
+
+    });
+
+  </script>
+
+</body>
+
+</html>
